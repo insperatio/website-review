@@ -218,8 +218,8 @@ line, and after the "Why ... not 100" note if there is one, add a short "What
 your score means" block. Three parts:
 
 1. **The band, in plain words.** Name their band, show all four with theirs
-   marked, and say how far they are from the next band. For example: "84% is
-   Solid (70 to 84), one point below Strong. The site works. The fixes below
+   marked, written as percentages ("70% to 84%", never "70 to 84"), and say how far they are from the next band. For example: "84% is
+   Solid (70% to 84%), one point below Strong. The site works. The fixes below
    are refinements, not rescues."
 2. **How it compares, only where public data exists.** Compare the
    accessibility and speed results with the wider web, naming the source and

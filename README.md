@@ -70,8 +70,9 @@ when it fell back to a lab run.
 Every problem also gets a severity (Critical, Major, Minor, Cosmetic), which
 decides the order of the fixes.
 
-Verdict bands: 85 and up, strong; 70 to 84, solid with fixes; 50 to 69, fix
-before spending more on traffic; under 50, rework the core message and path.
+Verdict bands, by percentage: 85% and up, strong; 70% to 84%, solid with
+fixes; 50% to 69%, fix before spending more on traffic; under 50%, rework the
+core message and path.
 
 Every report explains what the score means right under it: which band you are
 in and how far from the next, and how your accessibility and speed results

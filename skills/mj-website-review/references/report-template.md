@@ -24,15 +24,15 @@ before anything else:}
 > can do: "Check it yourself with the steps under Not yet checked and send the
 > answers back to have it scored."}
 
-**What your score means:** {percent}% is {band} ({range}). {How far from the
+**What your score means:** {percent}% is {band} ({range} as percentages, e.g. "70% to 84%"). {How far from the
 next band.} {One plain sentence on what that means for them.}
 
-| Band | Range | |
+| Band | Score range | |
 |---|---|---|
-| Strong | 85 to 100 | {"you are here" or empty} |
-| Solid | 70 to 84 | |
-| Fix before more traffic | 50 to 69 | |
-| Rework | under 50 | |
+| Strong | 85% to 100% | {"you are here" or empty} |
+| Solid | 70% to 84% | |
+| Fix before more traffic | 50% to 69% | |
+| Rework | Under 50% | |
 
 **Compared with the web:** {accessibility result against WebAIM Million, with
 date}. {speed result against Chrome UX Report, with date, and "lab" if lab}.

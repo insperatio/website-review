@@ -336,12 +336,13 @@ Say in the report when a cap was applied and why.
 
 ## Verdict bands
 
-Apply to the percentage of points available.
+Apply to the percentage of points available. Always write the bands as
+percentages, so a reader never mistakes them for points.
 
-- **85 to 100**: Strong. Polish, then test.
-- **70 to 84**: Solid. Fix the top issues.
-- **50 to 69**: Fix before spending more on traffic.
-- **Under 50**: Rework the core message and path.
+- **85% to 100%**: Strong. Polish, then test.
+- **70% to 84%**: Solid. Fix the top issues.
+- **50% to 69%**: Fix before spending more on traffic.
+- **Under 50%**: Rework the core message and path.
 
 State the band and one sentence on what it means. Do not soften a low band with
 praise that is not in the findings, and do not inflate a score to avoid
