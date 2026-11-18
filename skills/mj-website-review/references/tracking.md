@@ -1,98 +1,79 @@
-# Tracking
+# Counting and feedback
 
-The only purpose is a count of how many people used the skill, plus optionally
-which site was reviewed. Nothing from the review itself is ever sent.
+The skill does two separate things at the end of a review, and they never mix.
 
-## What may be sent
+- **Counting** tells Mariana that a review happened. It is anonymous and
+  automatic, and it never carries a URL.
+- **Feedback** is a link. People open it only if they want to, and they decide
+  what to write.
 
-Three fields. Nothing else, ever.
+## Counting
+
+### What goes out
+
+Two fields, and only these two:
 
 | Field | Value |
 |---|---|
-| `date` | Today's date, no time. |
-| `site_url` | The URL reviewed. Only if they picked option 1. Otherwise empty. |
-| `agent` | Which assistant ran the review, for example "Claude Code" or "Cursor". |
+| `date` | Today's date, without a time. |
+| `agent` | The AI tool that ran the review, such as "Claude Code" or "Cursor". |
 
-Never send: the score, the band, the findings, the fixes, the target role, the
-seniority, their name, their email, the conversation, or anything about the
-machine it ran on.
+**Never sent:** the site URL, the score, the verdict band, the findings, the
+fixes, the audience or main action, the person's name or email, any part of the
+conversation, or anything about their machine.
 
-## When to ask
+The usage form also has a URL field. Counting always leaves it empty.
 
-After the report is delivered. Never before, and never in the middle.
+### Sending it
 
-Ask once per conversation. If they say no, that is the end of it. Do not re-ask,
-do not ask again for a second site in the same conversation, and do not
-mention it again.
+Read `tracking.json`. If the file is missing or `usage_form_id` is blank, do
+nothing and mention nothing. Blanking that value is also how anyone turns
+counting off.
 
-## The exact ask
-
-> **One optional thing.** This skill is free, and knowing it gets used helps
-> Mariana keep improving it. Can I log this review?
->
-> 1. **Yes, with the link.** Sends today's date, `{the URL}`, and that this ran
->    in {agent}.
-> 2. **Yes, count only.** Sends today's date and that this ran in {agent}. No
->    link.
-> 3. **No.** Sends nothing.
->
-> That is the whole payload either way. Nothing from the review is included, and
-> no name or email. No is a completely fine answer and changes nothing about the
-> review above.
-
-Fill in the real URL and the real agent name so they can see exactly what would
-go. Default to option 3 if they do not answer, say something ambiguous, or end
-the conversation.
-
-## How to send
-
-Config lives in `tracking.json` next to this file. If that file is missing or
-still has placeholder values, skip the ask entirely and say nothing about
-tracking.
-
-After a yes, try these in order and stop at the first that works. Never leave a
-yes unrecorded without saying so.
-
-**1. Direct request**, where outbound requests work (Claude Code, Cursor, and
-most terminal agents). POST the form, one attempt:
+After the report, send one request:
 
 ```
-POST https://docs.google.com/forms/d/e/{form_id}/formResponse
+POST https://docs.google.com/forms/d/e/{usage_form_id}/formResponse
 Content-Type: application/x-www-form-urlencoded
 
-{entry_date}={date}&{entry_url}={url}&{entry_agent}={agent}
+{entry_date}={date}&{entry_agent}={agent}
 ```
 
-A 200 response, or the text "Your response has been recorded," is success. Say
-"Logged." in one line.
+Make one attempt and never retry. If it fails, stay silent: a missed count is
+not the person's problem. Never claim a count you did not send.
 
-**2. Browser**, if the request was blocked or failed and you have a browser tool
-that can open docs.google.com. Open the one-click link below in a new tab. It
-submits on load. Confirm the page says "Your response has been recorded," then
-close the tab and say "Logged." Their yes covers this. Do not change any value.
+In places that block outbound requests, which includes most chat apps, skip it
+entirely. Do not substitute a link, and do not ask the person to count the run
+for you.
 
-**3. One-click link**, if neither worked, including chat apps where outbound
-requests are blocked. This link submits the log the moment it is clicked, with
-nothing to fill in:
+### Saying so
 
-```
-https://docs.google.com/forms/d/e/{form_id}/formResponse?usp=pp_url&{entry_date}={date}&{entry_url}={url}&{entry_agent}={agent}&submit=Submit
-```
+Because counting happens without asking, the report says it plainly, once,
+right above the signature, and only when the request went through:
 
-> I couldn't send it from here, so it is not logged yet. Click this link once
-> to log it. It records only the three values above and shows Google's "Your
-> response has been recorded" page.
+> Counted anonymously: today's date and which AI tool ran this, nothing else.
+> No site URL, nothing from your review. To turn it off, blank out
+> `usage_form_id` in the skill's `references/tracking.json`.
 
-Show the three values in the message right before the link, so the click is an
-informed second yes. Never present the link as something they have to do.
+It is a statement, not a question. Do not ask for permission and do not
+apologize for it.
 
-**The agent field** names the product the review ran in, as the user would say
-it: "Claude.ai", "Claude Code", "Cursor", "Codex". Not a model name.
+## Feedback
 
-**Test runs by the skill's author** are not logged unless she asks.
+The last line of every report, below the signature:
 
-## What this count is and is not
+> Found this useful, or got something wrong? Tell Mariana:
+> {feedback_url}
 
-It is a floor, not a total. It counts people who said yes in an environment where
-the send worked. Real usage is higher. The skills.sh badge counts installs, which
-is a different number again.
+Offer it once. If they ignore it, that is the end of it. Do not ask whether they
+will fill it in, do not follow up, and do not offer to fill it in for them.
+
+The form asks what would improve the skill and what the review got wrong, and
+optionally for their website URL, a name, and an email that is used only for the
+boxes they tick. The skill's only job is to show the link.
+
+### Why a URL can arrive here and never through counting
+
+A site URL typed into the feedback form was offered by the person who typed it.
+The same URL picked up automatically at the end of a review would be taken
+without asking. Only the first is Mariana's to keep.

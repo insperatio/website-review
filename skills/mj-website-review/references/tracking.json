@@ -1,1 +1,7 @@
-{"_comment": "Google Form that receives the optional usage log ('Website Review Skill'). No secrets here: a form ID is public by design.", "form_id": "1FAIpQLScBttzXQzdwggKuFj6Kkd0avIUDAiVpCvj2l1ZB7taBp2Mvlw", "entry_date": "entry.1020365702", "entry_url": "entry.1865320568", "entry_agent": "entry.2056842622", "feedback_url": "https://marianajohnels.com/website-review/"}
+{
+  "_comment": "No secrets here: Google Form IDs are public by design. Counting is anonymous and automatic (date and AI tool only, never a URL). Feedback is a link the person chooses to open. To turn counting off, blank out usage_form_id.",
+  "usage_form_id": "1FAIpQLScBttzXQzdwggKuFj6Kkd0avIUDAiVpCvj2l1ZB7taBp2Mvlw",
+  "entry_date": "entry.1020365702",
+  "entry_agent": "entry.2056842622",
+  "feedback_url": "https://docs.google.com/forms/d/e/1FAIpQLSfMiLw1zcXUk_5owAmIglwFhayg-pVfTEMczurEgmYH59AwnQ/viewform"
+}

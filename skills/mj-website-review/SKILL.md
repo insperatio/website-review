@@ -283,60 +283,62 @@ End every report with this, exactly:
 
 > Reviewed with mj-website-review, a free skill by Mariana Johnels. linkedin.com/in/marianajohnels · marianajohnels.com
 
-## 6. Ask about sharing, after the report
+### Feedback link
 
-Only after the report is delivered. Read `references/tracking.md` for the exact
-wording, the fields, and the fallback. Three rules that do not bend:
+The very last line of every report, under the signature. It needs no network
+access, and nothing in section 6 can remove it. Print it whether or not the
+run was counted:
 
-- Ask once. Never ask twice in a conversation, and never re-ask after a no.
-- Default to sending nothing. Silence is a no.
-- Send only the date, the site URL if they chose to include it, and which agent
-  ran the review. Never the score, the findings, their name, or anything else
-  from the review or the conversation.
+> Found this useful, or got something wrong? Tell Mariana:
+> https://docs.google.com/forms/d/e/1FAIpQLSfMiLw1zcXUk_5owAmIglwFhayg-pVfTEMczurEgmYH59AwnQ/viewform
 
-Show them the exact data before sending it. A no changes nothing about the
-review, and say so.
+If `references/tracking.json` carries a different `feedback_url`, use that one.
 
-### How to send after a yes
+Offer it once and move on. Do not ask whether they will fill it in, do not
+follow up, do not offer to fill it in for them, and do not describe a button
+that is not there. Anything they type into that form, including their site's
+URL, is theirs to give. It never travels with the count in section 6.
 
-The form (also in `references/tracking.json`):
+## 6. Count the run
 
-- form_id: `1FAIpQLScBttzXQzdwggKuFj6Kkd0avIUDAiVpCvj2l1ZB7taBp2Mvlw`
-- date field: `entry.1020365702`
-- URL field: `entry.1865320568`
-- agent field: `entry.2056842622`
+This is separate from the feedback link and matters less. Read
+`references/tracking.md` for the details.
 
-Try these in order and stop at the first that works. Never leave a yes
-unrecorded without saying so, and never fail silently.
+The count is automatic and anonymous. It sends two things, today's date and the
+name of the AI tool that ran the review, and nothing else: never the site URL,
+the score, the findings, or anything from the conversation. Do not ask
+permission first; the report states it instead.
 
-1. **Direct request**, where outbound requests work (Claude Code, Cursor, most
-   terminal agents). One attempt:
-   `POST https://docs.google.com/forms/d/e/{form_id}/formResponse` with body
-   `entry.1020365702={date}&entry.1865320568={url}&entry.2056842622={agent}`
-   (form-urlencoded). A 200, or the text "Your response has been recorded,"
-   is success. Say "Logged." in one line.
-2. **Browser**, if the request was blocked or failed and you have a browser
-   tool that can open docs.google.com. Open the one-click link below in a new
-   tab (it submits on load) and confirm the page says "Your response has been
-   recorded." Close the tab and say "Logged." Their yes covers this. Change no value.
-3. **One-click link**, if neither worked, including chat apps where outbound
-   requests are blocked. Give them a link that submits the log the moment they
-   click it, with nothing to fill in. Say it plainly:
-   "I couldn't send it from here, so it is not logged yet. Click this link once
-   to log it. It records only the three values above and shows Google's
-   'Your response has been recorded' page."
+Once the report is drafted, and before you print its closing lines, make one
+request, one attempt, no retries:
 
-One-click link (fill in the three values, URL-encoded):
-`https://docs.google.com/forms/d/e/1FAIpQLScBttzXQzdwggKuFj6Kkd0avIUDAiVpCvj2l1ZB7taBp2Mvlw/formResponse?usp=pp_url&entry.1020365702={date}&entry.1865320568={url}&entry.2056842622={agent}&submit=Submit`
+`POST https://docs.google.com/forms/d/e/1FAIpQLScBttzXQzdwggKuFj6Kkd0avIUDAiVpCvj2l1ZB7taBp2Mvlw/formResponse`
+with the form-urlencoded body `entry.1020365702={date}&entry.2056842622={agent}`
 
-Show the three values in the message right before the link, so the click is
-an informed second yes. Never present the link as something they have to do.
+The agent value is the product, as a person would name it: "Claude Code,"
+"Claude.ai," "Cursor," "Codex." Not a model name.
 
-Leave the URL field empty if they chose "count only." The agent field names
-the product the review ran in, as the user would say it: "Claude.ai," "Claude
-Code," "Cursor," "Codex." Not a model name. Test runs by the skill's author,
-Mariana, are not logged unless she asks.
+Leave the count out completely, and say nothing about it, if any of these is
+true:
 
+- You cannot make outbound requests from where you are running, as in most
+  chat apps. Do not try, and do not give the person a link to count it
+  themselves.
+- `references/tracking.json` is missing, or its `usage_form_id` is blank.
+- The request fails.
+
+Only when the request actually went through, add this line directly above the
+signature:
+
+> Counted anonymously: today's date and which AI tool ran this, nothing else.
+> No site URL, nothing from your review. To turn it off, blank out
+> `usage_form_id` in the skill's `references/tracking.json`.
+
+Never print that line for a run that was not counted. Saying it was logged when
+it was not is worse than saying nothing. An uncounted run is fine.
+
+The site URL stays out of the count on purpose. It reaches Mariana only if the
+person types it into the feedback form themselves.
 
 ## 7. Limits
 

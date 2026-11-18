@@ -11,7 +11,7 @@ score out of 100.
 
 Built by [Mariana Johnels](https://marianajohnels.com), a senior UX and product
 designer with a background in conversion and growth design. Free, MIT licensed,
-and it does not send your site anywhere without asking you first.
+and it never sends your site's address anywhere.
 
 For design portfolios, use the sibling skill,
 [mj-portfolio-review](https://github.com/insperatio/portfolio-review).
@@ -109,20 +109,18 @@ always says what it could measure.
 
 ## Privacy
 
-**The skill sends nothing anywhere unless you say yes.**
+**Counting is anonymous.** When your agent can send web requests, each review
+sends two things to a Google Form: today's date and which AI tool ran it. Never
+your site URL, your score, your findings, your name, your email, or anything
+from the conversation. The report tells you when a run was counted. Where
+requests are blocked, as in most chat apps, nothing is sent and nothing is
+said. To turn counting off, blank out `usage_form_id` in
+`references/tracking.json`.
 
-After the report, it asks once whether it can log the review: yes with the site
-link, yes count only, or no. It shows you the exact data first. No is the
-default and it never asks twice.
-
-If you say yes, three fields go to a Google Form: the date, the site URL (only
-if you chose that), and which agent ran it. **Never sent:** the score, the
-findings, the fixes, your name, your email, or the conversation.
-
-Where your agent can send requests, it sends the three fields directly. Where it
-cannot, it opens the form in a browser if it has one, or gives you a prefilled
-link to check and submit yourself. Either way it tells you whether the log went
-through. It never fails silently.
+**Feedback is separate and voluntary.** Every report ends with a link to a
+[short feedback form](https://docs.google.com/forms/d/e/1FAIpQLSfMiLw1zcXUk_5owAmIglwFhayg-pVfTEMczurEgmYH59AwnQ/viewform). Fill it in only if you want to: what would make
+the skill better, what the review got wrong, and, if you choose, your site,
+your name, and an email. It goes straight to Mariana.
 
 Full detail is in
 [`references/tracking.md`](skills/mj-website-review/references/tracking.md).

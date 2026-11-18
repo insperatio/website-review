@@ -164,6 +164,13 @@ skill, drawing on Nielsen Norman Group, Steve Krug, Abby Covert,
 the LIFT model, Speero, Baymard, WCAG 2.2, and Google's Core Web Vitals. They
 are not endorsed by any of them.
 
+{Counting line, only when the run was actually counted. Otherwise leave it out
+entirely. See SKILL.md section 6.}
+
 ---
 Reviewed with mj-website-review, a free skill by Mariana Johnels. linkedin.com/in/marianajohnels · marianajohnels.com
+
+Found this useful, or got something wrong? Tell Mariana: {feedback_url}
 ```
+
+The feedback line closes every report and is never dropped.
